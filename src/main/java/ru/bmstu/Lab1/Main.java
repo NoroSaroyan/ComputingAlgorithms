@@ -1,4 +1,4 @@
-package ru.bmstu;
+package ru.bmstu.Lab1;
 
 import java.io.BufferedReader;
 import java.io.IOException;
