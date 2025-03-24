@@ -3,6 +3,7 @@ package ru.bmstu.Lab1;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.LinkedList;
 
 public class Main {
 
@@ -41,8 +42,9 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException {
-        BufferedReader r = new BufferedReader(
-                new InputStreamReader(System.in));
+        long startTime = System.nanoTime();
+
+        BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
         String date = r.readLine();
         int birthDay = Integer.parseInt(date.split(":")[0]);
         int birthMonth = Integer.parseInt(date.split(":")[1]);
@@ -57,5 +59,11 @@ public class Main {
                 System.out.println(year);
             }
         }
+
+        long endTime = System.nanoTime();
+        long durationMs = (endTime - startTime) / 1_000_000;
+        System.out.println();
+        System.out.println("Время выполнения программы: " + durationMs + " миллисекунд");
+
     }
 }

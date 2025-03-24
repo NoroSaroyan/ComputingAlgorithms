@@ -1,0 +1,9 @@
+curl -i -X 'POST' -H 'X-ALFACRM-TOKEN: d1abf2e82f9db3a3c636815831efff35 ' -d '{"id":1,"page":0}' 'https://imperiamodels.s20.online/v2api/1/lead-status/index
+
+curl -i -X 'POST' -d '{"email":"noriksaroyan@gmail.com","api_key":"517a4ffc-e88c-11ef-b9b8-3cecefbdd1ae"}' 'https://imperiamodels.s20.online/v2api/auth/login'
+
+curl -i -X 'POST' -H 'X-ALFACRM-TOKEN: d1abf2e82f9db3a3c636815831efff35' -d '{"id":1,"page":0}' 'https://imperiamodels.s20.online/v2api/1/lead/index'
+
+curl -i -X 'POST' -H 'X-ALFACRM-TOKEN: d1abf2e82f9db3a3c636815831efff35' -d '{"page":0}' 'https://imperiamodels.s20.online/v2api/1/communication/index'
+
+"d1abf2e82f9db3a3c636815831efff35"
