@@ -16,7 +16,7 @@ public class SortPanel extends JPanel {
     private final int BOX_SIZE = 60;
     private final int PADDING = 20;
     private int[] xPos;
-    // animation fields
+
     private boolean animating = false;
     private int animA, animB;
     private int targetAX, targetBX;

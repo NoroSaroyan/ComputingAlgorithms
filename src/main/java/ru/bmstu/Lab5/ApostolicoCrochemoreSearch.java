@@ -1,61 +1,98 @@
 package ru.bmstu.Lab5;
 
+/**
+ * Реализация алгоритма Апостолико-Крочемора для поиска подстроки в строке.
+ * Алгоритм основан на алгоритме КМП с некоторыми оптимизациями.
+ */
 public class ApostolicoCrochemoreSearch {
     public static void main(String[] args) {
-        String text = "ababcabcababc";
-        String pattern = "abcab";
-        System.out.println(text + " " + pattern);
-        apostolicoCrochemore(text, pattern);
+        String text = "ababcabcababc"; // Исходный текст, в котором ищем
+        String pattern = "abcab";      // Шаблон, который ищем
+        System.out.println(text + " " + pattern); // Вывод исходных данных
+        apostolicoCrochemore(text, pattern);     // Вызов алгоритма поиска
     }
 
+    /**
+     * Основная функция алгоритма Апостолико-Крочемора.
+     * Ищет все вхождения шаблона pattern в тексте text.
+     *
+     * @param text    - строка, в которой выполняется поиск
+     * @param pattern - искомый шаблон
+     */
     public static void apostolicoCrochemore(String text, String pattern) {
-        int m = pattern.length();
-        int n = text.length();
-        int[] kmpNext = computeKMPNext(pattern);
-        int[] failure = computeFailure(pattern);
-        int shift = 0;
-        int j = 0;
-        int i = 0;
+        int m = pattern.length(); // Длина шаблона
+        int n = text.length();    // Длина текста
 
+        // Вычисление вспомогательных массивов для определения смещений
+        int[] kmpNext = computeKMPNext(pattern); // Префикс-функция для шаблона
+        int[] failure = computeFailure(pattern); // В данной реализации идентична kmpNext
+
+        int shift = 0; // Текущее смещение шаблона относительно начала текста
+        int j = 0;     // Индекс текущего сравниваемого символа в шаблоне
+        int i = 0;     // Переменная объявлена, но фактически не используется в коде
+
+        // Основной цикл поиска - продолжается, пока шаблон может поместиться в оставшуюся часть текста
         while (shift <= n - m) {
+            // Сравниваем символы текста и шаблона, пока они совпадают
             while (j < m && pattern.charAt(j) == text.charAt(shift + j)) {
                 j++;
             }
 
+            // Если дошли до конца шаблона, значит нашли совпадение
             if (j == m) {
                 System.out.println("Подстрока найдена по индексу " + shift);
             }
 
+            // Обработка случая, когда первый символ не совпал
             if (j == 0) {
-                shift++;
+                shift++; // Просто сдвигаем на одну позицию вправо
             } else {
-                int k = failure[j - 1];
-                shift += (j - k);
-                j = Math.max(0, k);
+                // Используем таблицу смещений для оптимизации перехода
+                int k = failure[j - 1]; // Получаем длину префикса, совпадающего с суффиксом
+                shift += (j - k);       // Сдвигаем шаблон на оптимальное расстояние
+                j = Math.max(0, k);     // Начинаем сравнение с k-й позиции шаблона
             }
         }
     }
 
+    /**
+     * Вычисляет префикс-функцию для алгоритма КМП.
+     * Для каждой позиции i в строке определяет длину наибольшего префикса,
+     * который совпадает с суффиксом, заканчивающимся в позиции i.
+     *
+     * @param pattern - строка, для которой вычисляется префикс-функция
+     * @return массив значений префикс-функции
+     */
     public static int[] computeKMPNext(String pattern) {
-        int[] next = new int[pattern.length()];
-        int j = 0;
+        int[] next = new int[pattern.length()]; // Массив для хранения значений префикс-функции
+        int j = 0; // Длина текущего найденного префикса-суффикса
 
+        // Для первого символа значение всегда 0, поэтому начинаем с i=1
         for (int i = 1; i < pattern.length(); i++) {
+            // Если текущие символы не совпадают, откатываемся назад
             while (j > 0 && pattern.charAt(i) != pattern.charAt(j)) {
-                j = next[j - 1];
+                j = next[j - 1]; // Используем ранее вычисленные значения
             }
 
+            // Если текущие символы совпадают, увеличиваем длину префикса
             if (pattern.charAt(i) == pattern.charAt(j)) {
                 j++;
             }
 
-            next[i] = j;
+            next[i] = j; // Записываем длину найденного префикса
         }
         return next;
     }
 
+    /**
+     * Вычисляет таблицу failure для алгоритма Апостолико-Крочемора.
+     * В данной реализации просто возвращает префикс-функцию КМП,
+     * хотя в классическом алгоритме может использоваться модифицированная таблица.
+     *
+     * @param pattern - шаблон, для которого вычисляется таблица
+     * @return массив значений таблицы failure
+     */
     public static int[] computeFailure(String pattern) {
         return computeKMPNext(pattern); // в этом алгоритме используется как KMP
     }
 }
-
