@@ -4,6 +4,7 @@ public class ApostolicoCrochemoreSearch {
     public static void main(String[] args) {
         String text = "ababcabcababc";
         String pattern = "abcab";
+        System.out.println(text + " " + pattern);
         apostolicoCrochemore(text, pattern);
     }
 

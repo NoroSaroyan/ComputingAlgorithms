@@ -7,7 +7,6 @@ public class BinaryTreeSolution {
         Scanner scanner = new Scanner(System.in);
 
         // Демонстрация работы с бинарными деревьями
-        System.out.println("=== Лабораторная работа №7, Вариант 13 ===");
 
         // Создание первого дерева
         System.out.println("\nВведите символы для первого дерева (без пробелов):");
