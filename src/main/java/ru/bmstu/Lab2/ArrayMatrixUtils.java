@@ -61,10 +61,20 @@ public class ArrayMatrixUtils {
     }
 
     public static void main(String[] args) {
-        int[] arr1 = new int[]{1,2,3,4};
-        int[] arr2 = new int[]{4,2,1,3};
+        int[] arr1 = new int[]{1, 2, 3, 4};
+        int[] arr2 = new int[]{4, 2, 1, 3};
         System.out.println(Arrays.toString(intersection(arr1, arr2)));
-
-
+        int[][] matrix3 =
+                {{3, 2, 1, 7},
+                {9, 11, 5, 4},
+                {6, 0, 13, 17},
+                {7, 21, 14, 15}};
+        matrix3 = transpose(matrix3);
+        for (int i = 0; i < matrix3.length; i++) {
+            for (int j = 0; j < matrix3.length; j++) {
+                System.out.print(matrix3[i][j] + " ");
+            }
+            System.out.println("\n");
+        }
     }
 }

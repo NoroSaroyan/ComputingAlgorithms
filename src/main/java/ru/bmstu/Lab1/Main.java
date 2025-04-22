@@ -21,24 +21,16 @@ public class Main {
     }
 
     public static String weekdayName(int weekday) {
-        switch (weekday) {
-            case 0:
-                return "Суббота";
-            case 1:
-                return "Воскресенье";
-            case 2:
-                return "Понедельник";
-            case 3:
-                return "Вторник";
-            case 4:
-                return "Среда";
-            case 5:
-                return "Четверг";
-            case 6:
-                return "Пятница";
-            default:
-                return "";
-        }
+        return switch (weekday) {
+            case 0 -> "Суббота";
+            case 1 -> "Воскресенье";
+            case 2 -> "Понедельник";
+            case 3 -> "Вторник";
+            case 4 -> "Среда";
+            case 5 -> "Четверг";
+            case 6 -> "Пятница";
+            default -> "";
+        };
     }
 
     public static void main(String[] args) throws IOException {
